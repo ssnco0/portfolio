@@ -1,0 +1,19 @@
+@charset "utf-8";
+form {margin:0 auto;}
+.bbsListTbl {width:80%; border-top:2px solid #384d75; margin:10px;}
+.bbsListTbl td {padding:10px; box-sizing:border-box; height:55px;}
+.bbsListTbl td {text-align:center; line-height:1.3; border-bottom:1px solid #ccc;}
+.bbsListTbl td.tit_notice {text-align:left;}
+.bbsListTbl th {border-bottom: 1px solid #ccc; background: #f0f3fa;}
+.bbsListTbl th:not(.head) {padding:10px;}
+.bbsListTbl .head {width:15%;}
+.bbsListTbl tr #buttons {width:15%;}
+.bbsListTbl tr td input[type=number] {border:1px sollid #999; width:100%; height:100%; text-align:center;}
+.bbsListTbl tr td input[type=text] {border:1px sollid #999; width:100%; height:100%;}
+.bbsListTbl tr td #search {margin:2%; width:40%; height:30px; text-align:center;}
+.bbsListTbl tr td #submit {margin:2%; width:40%; height:30px; text-align:center;}
+.bbsListTbl tr:last-child {border-bottom:2px solid #384d75;}
+.bbsListTbl td:nth-child(1) {width:30%; border-right:1px solid #ccc;}
+.bbsListTbl td:nth-child(2) {width:30%;}
+.bbsListTbl td:nth-child(3) {width:20%;}
+.bbsListTbl td:nth-child(4) {width:20%;}

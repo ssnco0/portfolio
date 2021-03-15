@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE tiles-definitions PUBLIC
+"-//Apache Software Foundation//DTD Tiles Configuration 2.0//EN"
+"http://tiles.apache.org/dtds/tiles-config_2_0.dtd">
+<tiles-definitions>
+	
+	<!-- 쿠폰 리스트-가맹점 -->
+   <definition name="/cupon/listCupons" extends="baseLayout">
+      <put-attribute name="title" value="가맹점 쿠폰 리스트" />
+      <put-attribute name="body" value="/WEB-INF/views/cupon/listCupons.jsp" />
+   </definition>
+   	<!-- 쿠폰 리스트-사용자 -->
+   <definition name="/cupon/cusCuponList" extends="baseLayout">
+      <put-attribute name="title" value="사용자 쿠폰 리스트" />
+      <put-attribute name="body" value="/WEB-INF/views/cupon/cusCuponList.jsp" />
+   </definition>
+   
+   
+      	<!-- 테스트 -->
+   <definition name="/cupon/listCupons4" extends="baseLayout">
+      <put-attribute name="title" value="사용자 쿠폰 리스트" />
+      <put-attribute name="body" value="/WEB-INF/views/cupon/listCupons4.jsp" />
+   </definition>
+   
+   
+   	<!-- 쿠폰 리스트2 -->
+   <definition name="/cupon/listCupons2" extends="baseLayout">
+      <put-attribute name="title" value="결제목록창" />
+      <put-attribute name="body" value="/WEB-INF/views/cupon/listCupons2.jsp" />
+   </definition>
+   <!-- 쿠폰 폼 -->
+   <definition name="/cupon/cuponForm" extends="baseLayout">
+      <put-attribute name="title" value="결제하기" />
+      <put-attribute name="body" value="/WEB-INF/views/cupon/CuponForm.jsp" />
+   </definition>
+      
+</tiles-definitions>

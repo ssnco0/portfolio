@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+      PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="mapper.admin.mileage">
+	<resultMap id="ADmilResult" type="ADmileageVO">
+		<result property="milno" column="milno" />
+        <result property="milstack" column="milstack" />
+        <result property="cuspassword" column="cuspassword" />
+        <result property="cusid" column="cusid" />
+        <result property="mildate" column="mildate" />
+	</resultMap>
+	
+	<resultMap id="UsemilResult" type="useMilVO">
+		<result property="cusid" column="cusid" />
+        <result property="cusname" column="cusname" />
+        <result property="stoname" column="stoname" />
+        <result property="usemil" column="usemil" />
+        <result property="usedate" column="usedate" />
+	</resultMap>
+	
+	<resultMap id="UseStoMilResult" type="stoUseMilVO">
+		<result property="stoid" column="stoid" />
+        <result property="stoname" column="stoname" />
+        <result property="stoadress" column="stoadress" />
+        <result property="stolocnum" column="stolocnum" />
+        <result property="cusid" column="cusid" />
+        <result property="cusname" column="cusname" />
+        <result property="payusemil" column="payusemil" />
+        <result property="paydate" column="paydate" />
+	</resultMap>
+	
+	
+	<select id="selectAllMileage" resultMap="ADmilResult">
+      <![CDATA[
+         select * from Mileage order by mildate desc
+      ]]>
+	</select>
+	
+	<select id="selectAllUseMileage" resultMap="UsemilResult">
+      <![CDATA[
+         select * from Usemileage order by cusname desc
+      ]]>
+	</select>
+	
+	<select id="selectMileageBycusid" resultMap="ADmilResult">
+      <![CDATA[
+         select * from Mileage where cusid=#{cusid}
+      ]]>
+	</select>
+	
+	<select id="selectUseMileageBycusid" resultMap="UsemilResult">
+      <![CDATA[
+         select * from Usemileage where cusid=#{cusid}
+      ]]>
+	</select>
+	
+	<select id="SelectAllStoreMileage" resultMap="UseStoMilResult">
+      <![CDATA[
+         select * from StoUseMileage 
+      ]]>
+	</select>
+	
+	<select id="StoMileageById" resultMap="UseStoMilResult" >
+      <![CDATA[
+         select * from StoUseMileage where stoid=#{search}
+      ]]>
+	</select>
+	
+	<select id="StoMileageByName" resultMap="UseStoMilResult" >
+      <![CDATA[
+         select * from StoUseMileage where stoname=#{search}
+      ]]>
+	</select>
+	
+	<select id="StoMileageByLocNum" resultMap="UseStoMilResult" >
+      <![CDATA[
+         select * from StoUseMileage where stolocnum=#{search}
+      ]]>
+	</select>
+	
+</mapper>

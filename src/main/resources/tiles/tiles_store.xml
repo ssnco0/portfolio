@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE tiles-definitions PUBLIC
+       "-//Apache Software Foundation//DTD Tiles Configuration 2.0//EN"
+       "http://tiles.apache.org/dtds/tiles-config_2_0.dtd">
+<tiles-definitions>
+
+	<!-- 로그인 -->
+	<definition name="/store/loginForm" extends="LayoutNoSide">
+		<put-attribute name="title" value="가맹점 로그인창" />
+		<put-attribute name="body" value="/WEB-INF/views/common/loginForm.jsp" />
+	</definition>
+	<!-- 회원가입 -가맹점 -->
+	<definition name="/store/storeForm" extends="LayoutNoSide">
+		<put-attribute name="title" value="가맹점 회원등록창" />
+		<put-attribute name="body" value="/WEB-INF/views/store/storeForm.jsp" />
+	</definition>
+	
+	<!-- 아이디 찾기 폼 -->
+	<definition name="/store/findidform" extends="baseLayout">
+		<put-attribute name="title" value="아이디 찾기 폼" />
+		<put-attribute name="body" value="/WEB-INF/views/store/findidform.jsp" />
+	</definition>
+	
+		<!-- 아이디 찾기 -->
+	<definition name="/store/findid" extends="LayoutNoSide">
+		<put-attribute name="title" value="아이디 찾기 " />
+		<put-attribute name="body" value="/WEB-INF/views/store/findid.jsp" />
+	</definition>
+	
+		<!-- 비번 찾기  -->
+	<definition name="/store/findpw" extends="baseLayout">
+		<put-attribute name="title" value=" 비번 찾기 " />
+		<put-attribute name="body" value="/WEB-INF/views/store/findpw.jsp" />
+	</definition>
+	<!-- 비번 찾기 폼-->
+	<definition name="/member/findpwform" extends="LayoutNoSide">
+		<put-attribute name="title" value="비번 찾기 폼" />
+		<put-attribute name="body" value="/WEB-INF/views/store/findpwform.jsp" />
+	</definition>
+	
+	
+	<!-- 마이페이지 -->
+	<definition name="/mypage/myStorePage" extends="baseLayout">
+		<put-attribute name="title" value="가맹점 페이지" />
+		<put-attribute name="body" value="/WEB-INF/views/store/myStoInfo.jsp" />
+	</definition>
+	<!--수정 -->
+	<definition name="/mypage/modifyStoInfo" extends="baseLayout">
+		<put-attribute name="title" value="가맹점 페이지" />
+		<put-attribute name="body" value="/WEB-INF/views/store/modStoInfo.jsp" />
+	</definition>
+	
+	<definition name="/mypage/modStoInfo" extends="LayoutNoSide">
+		<put-attribute name="title" value="가맹점 페이지" />
+		<put-attribute name="body" value="/WEB-INF/views/store/modStoInfo.jsp" />
+	</definition>
+
+	<!-- 페이이지 테스트용 -->
+	<definition name="qr_create" extends="LayoutNoSide">
+		<put-attribute name="title" value="메인페이지" />
+		<put-attribute name="body" value="/WEB-INF/views/test.jsp" />
+	</definition>
+
+</tiles-definitions>

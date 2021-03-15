@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+      PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="mapper.admin.member">
+	<resultMap id="ADmemResult" type="ADmemberVO">
+		<result property="cusid" column="cusid" />
+		<result property="cusphone" column="cusphone" />
+		<result property="cuspassword" column="cuspassword" />
+		<result property="cusemail" column="cusemail" />
+		<result property="cusname" column="cusname" />
+		<result property="cusbirth" column="cusbirth" />
+		<result property="cusadress" column="cusadress" />
+		<result property="cussignupdate" column="cussignupdate" />
+		<result property="cusadv" column="cusadv" />
+		<result property="cusqrno" column="cusqrno" />
+		<result property="custotmil" column="custotmil" />
+	</resultMap>
+
+	<resultMap id="ADstoResult" type="ADstoreVO">
+		<result property="stoid" column="stoid" />
+		<result property="stophone" column="stophone" />
+		<result property="stopassword" column="stopassword" />
+		<result property="stoemail" column="stoemail" />
+		<result property="stoname" column="stoname" />
+		<result property="stoadress" column="stoadress" />
+		<result property="stobuinum" column="stobuinum" />
+		<result property="stosigndate" column="stosigndate" />
+		<result property="stolocnum" column="stolocnum" />
+		<result property="stosignapp" column="stosignapp" />
+	</resultMap>
+
+	<resultMap id="sumhomeResult" type="sumhomeVO">
+		<result property="stoid" column="stoid" />
+		<result property="stophone" column="stophone" />
+		<result property="stopassword" column="stopassword" />
+	</resultMap>
+
+	<resultMap id="ManagerResult" type="ManagerVO">
+		<result property="manId" column="manId" />
+		<result property="manPassword" column="manPassword" />
+		<result property="manName" column="manName" />
+		<result property="manAuthority" column="manAuthority" />
+		<result property="manPhone" column="manPhone" />
+		<result property="manEmail" column="manEmail" />
+	</resultMap>
+	<select id="sumhome" resultMap="sumhomeResult">
+      <![CDATA[
+         select * from sumMilstackUseMil
+      ]]>
+	</select>
+
+	<select id="selectAllMemberList" resultMap="ADmemResult">
+      <![CDATA[
+         select * from cususer order by cussignupdate desc
+      ]]>
+	</select>
+
+	<select id="selectCusMember" resultMap="ADmemResult">
+		<![CDATA[
+         select * from cususer where cusid=#{cusid}
+      ]]>
+	</select>
+
+	<select id="selectAllStoreMemberList" resultMap="ADstoResult">
+      <![CDATA[
+         select * from store order by stosigndate desc
+      ]]>
+	</select>
+
+	<select id="selectAllStoreByStoid" resultMap="ADstoResult">
+		<![CDATA[
+         select * from store where stoid=#{stoid}
+      ]]>
+	</select>
+
+	<select id="selectAppStoreByStoid" resultMap="ADstoResult">
+		<![CDATA[
+         select * from store where stoid=#{stoid} and stosignapp = '1'
+      ]]>
+	</select>
+
+	<select id="selectNotAppStoreByStoid" resultMap="ADstoResult">
+		<![CDATA[
+         select * from store where stoid=#{stoid} and stosignapp = '0'
+      ]]>
+	</select>
+
+	<select id="selectAppStoreMemberList" resultMap="ADstoResult">
+		<![CDATA[
+         select * from store where stosignapp = '1'
+         ]]>
+	</select>
+
+	<select id="selectNotAppStoreMemberList" resultMap="ADstoResult">
+		<![CDATA[
+         select * from store where stosignapp = '0'
+         ]]>
+	</select>
+
+
+	<!-- 로그인 -->
+	<select id="login" resultType="ManagerVO"
+		parameterType="java.util.Map"> 
+		<![CDATA[ 
+		select * from manager 
+		where manId=#{manId} 
+		and manPassword=#{manPassword}
+	
+		]]>
+	</select>
+	
+	<update id="approve">
+		<![CDATA[
+         update store set stosignapp = 1 where stoid=#{stoid}
+         ]]>
+	</update>
+	<delete id="deleteMember">
+		<![CDATA[
+         delete from store where stoid=#{stoid}
+         ]]>
+	</delete>
+
+	<delete id="removeCusUserById">
+		<![CDATA[
+         delete from cususer where cusid=#{cusid}
+         ]]>
+	</delete>
+
+</mapper>

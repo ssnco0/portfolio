@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+      PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="mapper.cupon">
+	<resultMap id="cupResult" type="cuponVO">
+		<result property="cupId" column="cupId" />
+		<result property="cupQrNo" column="cupQrNo" />
+		<result property="cupDate" column="cupDate" />
+		<result property="cupDiscount" column="cupDiscount" />
+		<result property="cupUseDate" column="cupUseDate" />
+		<result property="cupKind" column="cupKind" />
+		<result property="cupAdvContents" column="cupAdvContents" />
+		<result property="cusId" column="stoId" />
+		<result property="stoId" column="stoId" />
+	</resultMap>
+
+
+	<select id="selectAllCuponList" resultMap="cupResult">
+      <![CDATA[
+         select * from Cupon
+         where stoId=#{stoId}
+      ]]>
+	</select>
+	
+	
+
+	
+	<select id="selectCusCuponList" resultMap="cupResult">
+      <![CDATA[
+         select * from Cupon
+         where cusId=#{cusId} 
+      ]]>
+	</select>
+
+	<update id="selectTransCuponList" parameterType="cuponVO">
+	<foreach collection="cuponsList2" item="item" index="index"> 
+		UPDATE CUPON set cusId = #{item.cusId}  
+	 </foreach>
+	 	where cupId = #{cupId};
+	</update>
+	
+	<select id="SelectNupNumByCusId" resultMap="cupResult">
+      <![CDATA[
+         select * from cupon where cusid = #{selectCusIdChild} and cupkind = '승인'
+      ]]>
+	</select>
+	
+	<!-- 2020-03-07 -->
+	<!-- 쿠폰등록 -->
+   <insert id="insertCupon" parameterType="cuponVO">
+ 		<![CDATA[ 
+		
+		 insert into cupon(cupId, cupQrNo, cupDate, cupDiscount, cupKind, cupAdvContents, cusId, stoId)
+		 values((select nvl(MAX(cupId)+1,0) from cupon), trunc(dbms_random.value(100000,999999)), sysdate, #{cupDiscount}, #{cupKind}, #{cupAdvContents}, #{cusId}, #{stoId})
+  ]]> 
+  </insert>
+  
+  <insert id="addCupon" parameterType="cuponVO">
+ 	 <![CDATA[ 		
+		 insert into cupon(cupId, cupQrNo, cupDate, cupDiscount, cupKind, cupAdvContents, cusId, stoId)
+		 values((select nvl(MAX(cupId)+1,0) from cupon), trunc(dbms_random.value(100000,999999)), 
+		 sysdate, #{cupDiscount}, #{cupKind}, #{cupAdvContents}, #{cusId}, #{stoId})
+  	]]> 
+  </insert>
+  
+  	<update id="updateCupon" parameterType="cuponVO">
+     <![CDATA[
+	     update Cupon
+	     set cupUseDate=#{cupUseDate}
+	     where
+	     cupId=#{cupId}
+      ]]>
+	</update>
+	
+	<update id="cuponTypeChange" parameterType="cuponVO">
+     <![CDATA[
+	    update Cupon
+	     set cupKind = '사용' , cupUseDate = sysdate
+	     where
+	     cupId=#{cupId}
+      ]]>
+	</update>
+	
+	<update id="refundCuponTypeChange" parameterType="int">
+     <![CDATA[
+	    update Cupon
+	     set cupKind = '승인' 
+	     where
+	     cupId=#{cupId}
+      ]]>
+	</update>
+	
+
+
+
+
+<!-- 	<update id="selectTransCuponList" parameterType="cuponVO">
+     <![CDATA[
+	    update cupon 
+	    
+ 	 	set cusid = #{cusId} 
+  		where cupid = #{cupId};
+      ]]>
+	</update> -->
+
+
+
+
+
+
+
+	<!-- <select id="loginById" resultType="memberVO" parameterType="memberVO"> <![CDATA[ select * from t_member where id=#{id} and pwd=#{pwd} ]]> </select> -->
+
+</mapper>

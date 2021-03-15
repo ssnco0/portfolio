@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration 	PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-config.dtd">
+
+<configuration>
+	<typeAliases>
+
+
+		<typeAlias type="com.myspring.lmm.mileage.vo.MileageVO" alias="mileageVO" />
+		<typeAlias type="com.myspring.lmm.cupon.vo.CuponVO" alias="cuponVO" />
+		<typeAlias type="com.myspring.lmm.member.vo.MemberVO" alias="MemberVO" />
+		<typeAlias type="com.myspring.lmm.store.vo.StoreVO" alias="storeVO" />
+		<typeAlias type="com.myspring.lmm.mypage.vo.MyPageVO" alias="mypageVO" />
+
+
+		<typeAlias type="com.myspring.lmm.admin.member.vo.ManagerVO" alias="ManagerVO" />
+		<typeAlias type="com.myspring.lmm.admin.member.vo.ADMemberVO" alias="ADmemberVO" />
+		<typeAlias type="com.myspring.lmm.admin.member.vo.sumHomeVO" alias="sumHomeVO" />
+		<typeAlias type="com.myspring.lmm.admin.member.vo.store.ADStoreVO" alias="ADstoreVO" />
+		<typeAlias type="com.myspring.lmm.admin.cupon.vo.ADCuponVO" alias="ADcuponVO" />
+
+		<typeAlias type="com.myspring.lmm.admin.mileage.vo.ADMileageVO" alias="ADmileageVO" />
+		<typeAlias type="com.myspring.lmm.admin.mileage.vo.StoUseMilVO" alias="stousemilVO" />
+		<typeAlias type="com.myspring.lmm.admin.mileage.vo.UseMilVO" alias="usemilVO" />
+
+		<typeAlias type="com.myspring.lmm.store.vo.StoreCardVO" alias="StoreCardVO" />
+
+		<typeAlias type="com.myspring.lmm.message.vo.MessageVO" alias="messageVO" />
+		<typeAlias type="com.myspring.lmm.message.vo.StoMessageVO" alias="stomessageVO" />
+
+		<typeAlias type="com.myspring.lmm.payment.vo.PaymentVO" alias="paymentVO" />
+		<typeAlias type="com.myspring.lmm.payment.vo.PaySaveVO" alias="paySaveVO" />
+
+		<typeAlias type="com.myspring.lmm.intro.vo.IntroVO" alias="introVO" />
+		<typeAlias type="com.myspring.lmm.intro.vo.StoreBoardVO" alias="storeBoardVO" />
+		<typeAlias type="com.myspring.lmm.qna.vo.QnaVO" alias="qnaVO" />
+		<typeAlias type="com.myspring.lmm.ntc.vo.NtcVO" alias="ntcVO" />
+		<typeAlias type="com.myspring.lmm.reply.vo.ReplyVO" alias="replyVO" />
+	</typeAliases>
+</configuration>

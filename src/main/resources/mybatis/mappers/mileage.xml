@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+      PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="mapper.mileage">
+	<resultMap id="milResult" type="mileageVO">
+		<result property="milNo" column="milNo" />
+        <result property="milStack" column="milStack" />
+        <result property="payNum" column="payNum" />
+        <result property="cusId" column="cusId" />
+		<result property="milDate" column="milDate" />
+	</resultMap> 
+	
+	<!-- 적립 마일리지 조회 -->
+	<select id="selectStackMileage" resultMap="milResult">
+      <![CDATA[
+        select * from Mileage 
+		where 1=1 and cusId=#{cusId} and milstack !=0
+		order by mildate desc
+      ]]>
+	</select>
+<insert id="saveMileage"  parameterType="paySaveVO">
+		<![CDATA[
+		 insert into Mileage(milNo, milStack, payNum, cusId, milDate)
+		 values((select cusqrno + #{payNum} from cususer where cusid=#{cusId}) + 1, #{milStack}, #{payNum}, #{cusId}, sysdate)
+		]]>      
+	</insert>
+
+
+  <insert id="insertMileage"  parameterType="mileageVO">
+		<![CDATA[
+		 insert into Mileage(milNo, milStack, payNum, cusId, milDate)
+		 values(#{milNo}, #{milStack}, #{payNum}, #{cusId}, #{milDate})
+		]]>      
+	</insert>
+	
+   
+   <update id="updateMileage"  parameterType="mileageVO">
+     <![CDATA[
+	     update 
+	     set pwd=#{pwd}, name=#{name}, email=#{email}
+	     where
+	     id=#{id}
+      ]]>      
+   </update> 
+     
+   <delete id="removeMileage"  parameterType="int">
+	<![CDATA[
+	   delete from  Mileage
+	   where
+	   payNum=#{payNum}
+	]]>      
+  </delete>
+
+
+
+</mapper>

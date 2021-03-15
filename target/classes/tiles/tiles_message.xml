@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE tiles-definitions PUBLIC
+"-//Apache Software Foundation//DTD Tiles Configuration 2.0//EN"
+"http://tiles.apache.org/dtds/tiles-config_2_0.dtd">
+
+
+
+<tiles-definitions>
+	<!--  쪽지 리스트 - 사용자 -->
+   <definition name="/message/listMessage" extends="baseLayout">
+      <put-attribute name="title" value="쪽지목록" />
+      <put-attribute name="body" value="/WEB-INF/views/message/userMessageList.jsp" />
+   </definition>
+   
+   	<!--  쪽지 상세 - 사용자 -->
+<!--    <definition name="/message/listMessage" extends="baseLayout">
+      <put-attribute name="title" value="쪽지목록" />
+      <put-attribute name="body" value="/WEB-INF/views/message/userMessageDetail" />
+   </definition> -->
+   
+   
+   	<!--  쪽지 리스트  가맹점 -->
+   <definition name="/message/stolistMessage" extends="baseLayout">
+      <put-attribute name="title" value="쪽지목록" />
+      <put-attribute name="body" value="/WEB-INF/views/message/storeMessageList.jsp" />
+   </definition>
+   
+      	<!--  쪽지 상세 - 가맹점 -->
+<!--    <definition name="" extends="baseLayout">
+      <put-attribute name="title" value="쪽지목록" />
+      <put-attribute name="body" value="/WEB-INF/views/message/userMessageDetail" />
+   </definition> -->
+   
+   <definition name="/message/messageRegiForm" extends="baseLayout">
+      <put-attribute name="title" value="쪽지전송" />
+      <put-attribute name="body" value="/WEB-INF/views/message/messageRegiForm.jsp" />
+   </definition>
+
+</tiles-definitions>

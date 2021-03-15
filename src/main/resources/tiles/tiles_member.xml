@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE tiles-definitions PUBLIC
+"-//Apache Software Foundation//DTD Tiles Configuration 2.0//EN"
+"http://tiles.apache.org/dtds/tiles-config_2_0.dtd">
+<tiles-definitions>
+
+		<!-- 로그인 -->
+	<definition name="/member/loginForm" extends="LayoutNoSide">
+		<put-attribute name="title" value="로그인" />
+		<put-attribute name="body" value="/WEB-INF/views/common/loginForm.jsp" />
+	</definition>
+	
+	<!-- 회원가입 -사용자 -->
+	<definition name="/member/memberForm" extends="LayoutNoSide">
+		<put-attribute name="title" value="사용자 회원등록창" />
+		<put-attribute name="body" value="/WEB-INF/views/member/memberForm.jsp" />
+	</definition>
+	
+	<!-- 아이디 찾기 폼 -->
+	<definition name="/member/findidform" extends="baseLayout">
+		<put-attribute name="title" value=" 아이디 찾기 폼" />
+		<put-attribute name="body" value="/WEB-INF/views/member/findidform.jsp" />
+	</definition>
+	
+		<!-- 아이디 찾기 -->
+	<definition name="/member/findid" extends="LayoutNoSide">
+		<put-attribute name="body" value="/WEB-INF/views/member/findid.jsp" />
+	</definition>
+			<!-- 비번 찾기  -->
+	<definition name="/member/findpw" extends="baseLayout">
+		<put-attribute name="title" value=" 비번 찾기 " />
+		<put-attribute name="body" value="/WEB-INF/views/member/findpw.jsp" />
+	</definition>
+		<!-- 비번 찾기 폼 -->
+	<definition name="/member/findpwform" extends="LayoutNoSide">
+		<put-attribute name="title" value="사용자 사용자 아이디 찾기 폼" />
+		<put-attribute name="body" value="/WEB-INF/views/member/findpwform.jsp" />
+	</definition>
+		
+	
+	<!-- 마이페이지 -->
+	<definition name="/mypage/myDetailInfo" extends="baseLayout">
+		<put-attribute name="title" value="사용자 페이지" />
+		<put-attribute name="body" value="/WEB-INF/views/member/myCusInfo.jsp" />
+	</definition>
+	<!-- 수정 -->
+	<definition name="/mypage/modifyCusInfo" extends="baseLayout">
+		<put-attribute name="title" value="사용자 페이지" />
+		<put-attribute name="body" value="/WEB-INF/views/member/modCusInfo.jsp" />
+	</definition>
+	
+	<definition name="/mypage/modCusInfo" extends="LayoutNoSide">
+		<put-attribute name="title" value="사용자 페이지" />
+		<put-attribute name="body" value="/WEB-INF/views/member/modCusInfo.jsp" />
+	</definition>
+
+	
+
+
+
+
+</tiles-definitions>

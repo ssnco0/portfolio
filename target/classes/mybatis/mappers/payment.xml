@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+      PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="mapper.payment">
+	<resultMap id="payResult" type="paymentVO">
+		<result property="payNum" column="payNum" />
+		<result property="payAco" column="paySco" />
+		<result property="payReal" column="payReal" />
+		<result property="payDate" column="payDate" />
+		<result property="payUseMil" column="payUseMil" />
+		<result property="milStack" column="milStack" />
+		<result property="payType" column="payType" />
+		<result property="stoId" column="stoId" />
+		<result property="cusId" column="cusId" />
+		<result property="cupId" column="cupId" />
+	</resultMap>
+
+
+	<select id="selectAllPaymentList" resultMap="payResult">
+      <![CDATA[
+         select * from Payment where stoid=#{stoId} and paytype=0 order by payDate desc
+        
+      ]]>
+	</select>
+
+	<select id="selectLastPayNum" resultType="Integer">
+      <![CDATA[
+         SELECT * 
+			FROM(select paynum from payment order by paynum desc)
+				WHERE ROWNUM = 1
+   
+      ]]>
+	</select>
+
+	<insert id="addPayment" parameterType="paysaveVO">
+		<![CDATA[
+		 insert into Payment
+		 values( #{payNum}, #{payAco}, #{payReal}, sysdate, #{payUseMil}, 0, #{stoId}, #{cusId}, #{cupId} ,#{milStack})	 
+	]]>
+	</insert>
+
+
+
+	<update id="deletePayment" parameterType="int">
+	<![CDATA[
+	   update payment set paytype = 1 where paynum=#{paynum}
+	]]>
+	</update>
+
+	<!-- 사용 마일리지 조회-내가추가 -->
+	<select id="selectUseMileage" resultMap="payResult" parameterType="paymentVO">
+      <![CDATA[
+        select *
+        from payment 
+		where cusId=#{cusId} and payUseMil !=0
+	
+      ]]>
+	</select>
+
+</mapper>

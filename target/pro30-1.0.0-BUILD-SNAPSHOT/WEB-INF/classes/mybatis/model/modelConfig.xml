@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration 	PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-config.dtd">
+
+<configuration>
+	<typeAliases>
+		
+		<typeAlias type="com.myspring.lmm.member.vo.MemberVO"  alias="MemberVO" />
+		<typeAlias type="com.myspring.lmm.member.vo.StoreVO"  alias="storeVO" />
+		<typeAlias type="com.myspring.lmm.board.vo.ArticleVO"  alias="articleVO" />
+		<typeAlias type="com.myspring.lmm.board.vo.ImageVO"  alias="imageVO" />
+		<typeAlias type="com.myspring.lmm.payment.vo.PaymentVO"  alias="paymentVO" />
+		<typeAlias type="com.myspring.lmm.mileage.vo.MileageVO"  alias="mileageVO" />
+		<typeAlias type="com.myspring.lmm.cupon.vo.CuponVO"  alias="cuponVO" />
+		
+	</typeAliases>
+</configuration>

@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+      PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="mapper.store">
+	<resultMap id="stoResult" type="storeVO">
+		<result property="stoId" column="stoId" />
+        <result property="stoPhone" column="stoPhone" />
+        <result property="stoPassword" column="stosPassword" />
+        <result property="stoEmail" column="stoEmail" />
+        <result property="stoName" column="stoName" />
+		<result property="stoAdress" column="stoAdress" />
+		<result property="stoBuiNum" column="stoBuiNum" />
+		<result property="stoSignupDate" column="stoSignupDate" />
+		<result property="stoLocNum" column="stoLocNum" />
+		<result property="stoSignApp" column="stoSignApp" />	
+	</resultMap> 
+	
+	<resultMap id="imgResult" type="StoreCardVO">
+	  <result property="scNo" column="scNo" />
+	  <result property="scImageFileName" column="scImageFileName" />
+	  <result property="scDate" column="scDate" />
+	  <result property="stoId" column="stoId" />
+ </resultMap>
+	
+
+<!-- 회원가입 -->
+	<!-- 가맹점 store -->
+	<insert id="insertStore" parameterType="storeVO">
+		<![CDATA[
+		 insert into Store (stoId, stoPhone,stoPassword,stoEmail,stoName,stoAdress,
+		 									stoBuiNum,stoSignDate,stoLocNum,stoSignApp) 
+		 			 values(#{stoId}, #{stoPhone},#{stoPassword},#{stoEmail},#{stoName},
+		 			 		#{stoAdress},#{stoBuiNum},sysdate,#{stoLocNum},#{stoSignApp})
+		]]>
+	</insert>
+	<!-- 로그인 -->
+	<select id="login" resultType="storeVO"
+		parameterType="java.util.Map"> 
+		<![CDATA[ 
+		select * from Store 
+		where stoId=#{stoId} 
+		and stoPassword=#{stoPassword} 
+		]]>
+	</select>
+
+	<!-- ID 중복 -->
+	<select id="selectOverlappedID" parameterType="String"
+		resultType="String">
+		select decode(count(*),1, 'true', 0, 'false')
+		from Store
+		where stoId = #{stoId}
+	</select>
+	<!-- 휴대폰 중복 -->
+	<select id="selectOverlappedPhone" parameterType="String"
+		resultType="String">
+		select decode(count(*),1, 'true', 0, 'false')
+		from Store
+		where stoPhone = #{stoPhone}
+	</select>
+	<!-- 이메일 중복 -->
+	<select id="selectOverlappedEmail" parameterType="String"
+		resultType="String">
+		select decode(count(*),1, 'true', 0, 'false')
+		from Store
+		where stoEmail = #{stoEmail}
+	</select>
+	
+	<!-- 마이페이지 -->
+	<select id="selectMyStorePage" resultType="storeVO"
+		parameterType="String">
+	    <![CDATA[
+			select * from  Store
+			where stoId=#{stoId}
+	    	]]>
+	</select>
+	<!-- 비번확인 - 정보수정 -->
+	<select id="selectStoPwChk" parameterType="String"
+		resultType="String">
+		select decode(count(*),1, 'true', 0, 'false')
+		from Store
+		where stoPassword = #{stoPassword}
+	</select>
+		<!-- 아이디 찾기 -->
+	<select id="findid" parameterType="String" resultType="String">
+		  <![CDATA[
+		select stoId from Store 
+		where stoEmail = #{stoEmail}
+		]]>
+	</select>
+	<!-- 비밀번호 찾기  -->
+	<update id="update_pw" parameterType="storeVO">
+		<![CDATA[
+		update Store set stoPassword = #{stoPassword} where stoId = #{stoId}
+		]]>
+	</update>
+
+		<!-- 정보 수정 -->
+	<update id="storeUpdate" parameterType="storeVO">
+	<![CDATA[
+		update store
+		set
+		stoPhone=#{stoPhone},
+		stoPassword=#{stoPassword},
+		stoEmail=#{stoEmail},
+		stoAdress=#{stoAdress}
+		where
+		stoId=#{stoId}
+	]]>
+	</update>
+
+		<!-- 테스트 -->
+  <insert id="insertScImg"  parameterType="java.util.Map">
+		<![CDATA[
+			INSERT into storeCard(scNo,  scImageFileName, scDate, stoId)
+			VALUES(#{scNo},#{scImageFileName},	sysdate, #{stoId})
+		]]>      
+	</insert>
+
+<select id="selectNewImageFileNO" resultType="int"  >
+    <![CDATA[
+      SELECT  nvl(max(scNo),0) from storeCard		
+    ]]>
+  </select>
+
+</mapper>

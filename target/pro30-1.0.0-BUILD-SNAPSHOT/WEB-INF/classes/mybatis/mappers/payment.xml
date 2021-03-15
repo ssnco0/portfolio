@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+      PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="mapper.payment">
+	<resultMap id="payResult" type="paymentVO">
+		<result property="payNum" column="payNum" />
+		<result property="payAco" column="paySco" />
+		<result property="payReal" column="payReal" />
+		<result property="payDate" column="payDate" />
+		<result property="payUseMil" column="payUseMil" />
+		<result property="payType" column="payType" />
+		<result property="stoId" column="stoId" />
+		<result property="cusId" column="cusId" />
+		<result property="cupId" column="cupId" />
+
+
+	</resultMap>
+
+	<!-- <resultMap id="memResult" type="java.util.HashMap"> <result property="id" 
+		column="id" /> <result property="pwd" column="pwd" /> <result property="name" 
+		column="name" /> <result property="email" column="email" /> <result property="joinDate" 
+		column="joinDate" /> </resultMap> -->
+
+
+
+	<select id="selectAllPaymentList" resultMap="payResult">
+      <![CDATA[
+         select * from Payment order by payNum asc
+        
+      ]]>
+	</select>
+
+
+
+	
+	<insert id="insertPayment" parameterType="paymentVO">
+		<![CDATA[
+		 insert into Payment(payNum,payAco, payReal, payDate, payUseMil, payType, stoId, cusId, cupId)
+		 values( (SELECT NVL(MAX(payNum),0)+1 FROM Payment), #{payAco}, #{payReal}, sysdate, #{payUseMil}, '0', #{stoId}, #{cusId}, #{cupId})
+		 
+	]]>
+	</insert>
+	
+<!-- 
+	<update id="updateMember" parameterType="memberVO">
+     <![CDATA[
+	     update t_member
+	     set pwd=#{pwd}, name=#{name}, email=#{email}
+	     where
+	     id=#{id}
+      ]]>
+	</update>
+
+-->
+
+
+
+
+	<delete id="deletePayment" parameterType="int">
+	<![CDATA[
+	   delete from  Payment
+	   where
+	   payNum=#{payNum}
+	]]>
+	</delete>
+
+
+
+<!-- 
+
+	<select id="loginById" resultType="memberVO"
+		parameterType="memberVO">
+	<![CDATA[
+		select * from t_member	
+		where id=#{id} and pwd=#{pwd}		
+	]]>
+	</select>
+ -->
+ 	
+</mapper>

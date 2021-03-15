@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+      PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="mapper.admin.cupon">
+	<resultMap id="cuponResult" type="ADcuponVO">
+		<result property="cupid" column="cupid" />
+        <result property="cupqrno" column="cupqrno" />
+        <result property="cupdate" column="cupdate" />
+        <result property="cupdiscound" column="cupdiscound" />
+        <result property="cupusedate" column="cupusedate" />
+        <result property="cupkind" column="cupkind" />
+        <result property="cupadvcontents" column="cupadvcontents" />
+        <result property="cusid" column="cusid" />
+        <result property="stoid" column="stoid" />
+	</resultMap> 
+	
+	<select id="SelectAllCupon" resultMap="cuponResult">
+      <![CDATA[
+         select * from cupon where cupkind = '승인' or cupkind = '비승인'
+      ]]>
+	</select>
+
+	<select id="SelectNoAppCupon" resultMap="cuponResult">
+      <![CDATA[
+         select * from cupon where cupkind = '비승인'
+      ]]>
+	</select>
+	
+	<select id="SelectYesAppCupon" resultMap="cuponResult">
+      <![CDATA[
+         select * from cupon where cupkind = '승인'
+      ]]>
+	</select>
+	
+	<select id="SelectCupByCupNum" resultMap="cuponResult">
+      <![CDATA[
+         select * from cupon where cupqrno = #{search}
+      ]]>
+	</select>
+
+	<select id="SelectYesAppCupByCupNum" resultMap="cuponResult">
+      <![CDATA[
+         select * from cupon where cupkind = '승인' and cupqrno = #{search}
+      ]]>
+	</select>
+	
+	<select id="SelectNoAppCupByCupNum" resultMap="cuponResult">
+      <![CDATA[
+         select * from cupon where cupkind = '비승인' and cupqrno = #{search}
+      ]]>
+	</select>
+	
+	<select id="SelectAllNotUseCupon" resultMap="cuponResult">
+      <![CDATA[
+         select * from cupon where cupkind = '승인' and cusid is not null
+      ]]>
+	</select>
+	
+	<select id="SelectAllYesUseCupon" resultMap="cuponResult">
+      <![CDATA[
+         select * from cupon where cupkind = '사용' and cusid is not null
+      ]]>
+	</select>
+	
+	<select id="SelectNotUseCuponById" resultMap="cuponResult">
+      <![CDATA[
+         select * from cupon where cupkind = '승인' and cupqrno = #{search}
+      ]]>
+	</select>
+	
+	<select id="SelectUseCuponById" resultMap="cuponResult">
+      <![CDATA[
+         select * from cupon where cupkind = '사용' and cupqrno = #{search}
+      ]]>
+	</select>
+	
+	<update id="StoreCuponApp">
+		<![CDATA[
+         update cupon set cupkind = '승인' where cupid=#{cupid}
+         ]]>
+	</update>
+
+</mapper>

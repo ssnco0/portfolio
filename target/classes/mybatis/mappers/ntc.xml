@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+      PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="mapper.ntc">
+<resultMap id="articlesResult" type="ntcVO">
+    <result property="ntcNo" column="ntcNo" />
+    <result property="ntcTitle" column="ntcTitle" />
+    <result property="ntcContents" column="ntcContents" />
+    <result property="ntcitWriter" column="NtcitWriter" />
+    <result property="ntcDate" column="ntcDate" />
+    <result property="ntcViews" column="ntcViews" />
+    
+  </resultMap> 
+  
+  <select id="selectAllArticlesList" resultMap="articlesResult"   >
+    <![CDATA[
+      SELECT ntcNo, ntcTitle, ntcContents, ntcitWriter, ntcDate, ntcViews
+      from NTC
+             
+      ORDER BY ntcNo DESC		
+    ]]>
+  </select>
+  
+	<!--단일이미지 추가  -->
+	 
+  <insert id="insertNewArticle"  parameterType="java.util.Map">
+		<![CDATA[
+			INSERT into NTC(ntcNo, ntcTitle, ntcContents, ntcitWriter, ntcDate, ntcViews)
+			 VALUES(#{ntcNo}, #{ntcTitle}, #{ntcContents}, #{ntcitWriter}, sysdate, 0)
+		]]>      
+	</insert>
+	
+  <select id="selectNewArticleNO" resultType="int"  >
+		<![CDATA[
+			SELECT nvl(max(ntcNo), 0) + 1 from NTC		
+		]]>
+	</select>
+	
+  <select id="selectArticle" resultType="ntcVO"   parameterType="int">
+    <![CDATA[
+      SELECT * from NTC
+      where ntcNo = #{ntcNo}		
+    ]]>
+  </select>
+  
+  <update id="updateArticle"  parameterType="java.util.Map">
+	<![CDATA[		
+			update NTC
+			set ntcTitle = #{title},	 
+			ntcContents = #{content}
+			
+			where ntcNo = #{articleNO}
+  	]]>
+	</update>
+	
+	<delete id="deleteArticle"  parameterType="int">
+    <![CDATA[
+      delete from NTC
+      where ntcNo = #{ntcNo}
+        
+    ]]>      
+  </delete> 
+  
+</mapper>

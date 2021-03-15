@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+      PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="mapper.message">
+	<!-- 사용자 쪽지 -->
+	<resultMap id="mesResult" type="messageVO">
+		<result property="umNum" column="umNum" />
+		<result property="umTitle" column="umTitle" />
+		<result property="umContents" column="umContents" />
+		<result property="umDate" column="umDate" />
+		<result property="cusId" column="cusId" />
+	</resultMap>
+	
+	<!-- 가맹점 쪽지 -->
+	<resultMap id="stomesResult" type="stomessageVO">
+		<result property="smNo" column="smNo" />
+		<result property="smTitle" column="smTitle" />
+		<result property="smContents" column="smContents" />
+		<result property="smDate" column="smDate" />
+		<result property="stoId" column="stoId" />
+	</resultMap>
+
+	<!-- 쪽지 리스트 - 사용자 -->
+	<select id="selectAllMessageList" resultMap="mesResult">
+      <![CDATA[
+         select * from usermessage	
+         where cusId=#{cusId}
+         order by umDate desc
+      ]]>
+	</select>
+	
+	<!-- 쪽지 리스트 - 가맹점 -->
+	<select id="selectAllStoMessageList" resultMap="stomesResult">
+      <![CDATA[
+         select * from storemessage	
+         where stoId=#{stoId}
+         order by smDate desc
+      ]]>
+	</select>
+	
+	<!-- 쪽지전송	-->
+
+	<insert id="insertMessage"  parameterType="messageVO">
+	  
+		<![CDATA[
+		
+		 insert into usermessage(umNum, umTitle, umContents, umDate, cusId)
+		values((select nvl(MAX(umNum)+1,0) from usermessage), #{umTitle}, #{umContents}, sysdate, #{cusId})
+		 
+		]]>
+	    
+	</insert>
+	
+
+	<!-- 쿠폰전송 -->
+
+<!-- 	<insert id="insertMessage" parameterType="messageVO">
+		<foreach collection="messageList" open="insert all" item="item" separator=" " close="select *from dual">	
+		<![CDATA[
+		
+		 insert into usermessage(umNum, umTitle, umContents, umDate, cusId)
+		values((select nvl(MAX(umNum)+1,0) from usermessage), #{umTitle}, #{umContents}, sysdate, #{cusId})
+		 
+		]]>
+		</foreach>
+	</insert> -->
+
+	<delete id="deleteMessage" parameterType="int">
+	<![CDATA[
+	   delete from  usermessage
+	   where
+	   umNum=#{umNum}
+	]]>
+	</delete>
+
+
+
+</mapper>
